@@ -73,6 +73,7 @@ module Text.Pandoc
                , readHaddock
                , readNative
                , readJSON
+               , readOrg
                -- * Writers: converting /from/ Pandoc format
                , Writer (..)
                , writeNative
@@ -122,6 +123,7 @@ import Text.Pandoc.Readers.HTML
 import Text.Pandoc.Readers.Textile
 import Text.Pandoc.Readers.Native
 import Text.Pandoc.Readers.Haddock
+import Text.Pandoc.Readers.Org
 import Text.Pandoc.Writers.Native
 import Text.Pandoc.Writers.Markdown
 import Text.Pandoc.Writers.RST
@@ -190,21 +192,22 @@ markdown o s = do
 
 -- | Association list of formats and readers.
 readers :: [(String, ReaderOptions -> String -> IO Pandoc)]
-readers = [ ("native"       , \_ s -> return $ readNative s)
-           ,("json"         , \o s -> return $ readJSON o s)
-           ,("markdown"     , markdown)
-           ,("markdown_strict" , markdown)
+readers = [ ("native"            , \_ s -> return $ readNative s)
+           ,("json"              , \o s -> return $ readJSON o s)
+           ,("markdown"          , markdown)
+           ,("markdown_strict"   , markdown)
            ,("markdown_phpextra" , markdown)
-           ,("markdown_github" , markdown)
-           ,("markdown_mmd",  markdown)
-           ,("rst"          , \o s -> return $ readRST o s)
-           ,("mediawiki"    , \o s -> return $ readMediaWiki o s)
-           ,("docbook"      , \o s -> return $ readDocBook o s)
-           ,("opml"         , \o s -> return $ readOPML o s)
-           ,("textile"      , \o s -> return $ readTextile o s) -- TODO : textile+lhs
-           ,("html"         , \o s -> return $ readHtml o s)
-           ,("latex"        , \o s -> return $ readLaTeX o s)
-           ,("haddock"      , \o s -> return $ readHaddock o s)
+           ,("markdown_github"   , markdown)
+           ,("markdown_mmd"      , markdown)
+           ,("rst"               , \o s -> return $ readRST o s)
+           ,("mediawiki"         , \o s -> return $ readMediaWiki o s)
+           ,("docbook"           , \o s -> return $ readDocBook o s)
+           ,("opml"              , \o s -> return $ readOPML o s)
+           ,("textile"           , \o s -> return $ readTextile o s) -- TODO : textile+lhs
+           ,("html"              , \o s -> return $ readHtml o s)
+           ,("latex"             , \o s -> return $ readLaTeX o s)
+           ,("haddock"           , \o s -> return $ readHaddock o s)
+           ,("org"               , \o s -> return $ readOrg o s)
            ]
 
 data Writer = PureStringWriter   (WriterOptions -> Pandoc -> String)

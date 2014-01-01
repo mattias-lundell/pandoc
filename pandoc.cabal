@@ -266,6 +266,7 @@ Library
                    Text.Pandoc.Readers.Textile,
                    Text.Pandoc.Readers.Native,
                    Text.Pandoc.Readers.Haddock,
+                   Text.Pandoc.Readers.Org,
                    Text.Pandoc.Writers.Native,
                    Text.Pandoc.Writers.Docbook,
                    Text.Pandoc.Writers.OPML,
